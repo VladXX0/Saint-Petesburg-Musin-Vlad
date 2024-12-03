@@ -1,0 +1,16 @@
+Index: git_project1..py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/git_project1..py b/git_project1..py
+new file mode 100644
+--- /dev/null	(date 1733252785930)
++++ b/git_project1..py	(date 1733252785930)
+@@ -0,0 +1,5 @@
++def main():
++    print('My first git-repo')
++
++if __name__ == '__main__':
++    main()
+\ No newline at end of file
