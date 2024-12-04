@@ -4,28 +4,33 @@ from PyQt6.QtWidgets import QApplication, QPushButton, QMainWindow
 from PyQt6.QtGui import QPainter, QColor
 
 
+class Interface:
+    def setup_ui(window):
+        window.setGeometry(300, 300, 400, 400)
+        window.setWindowTitle('Случайные круги')
+        window.btn = QPushButton('Нарисовать круг', window)
+        window.btn.move(150, 10)
+        window.btn.clicked.connect(window.make_circle)
+
+
 class Example(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.initUI()
-        self.circle_params = None  # Параметры круга
-
-    def initUI(self):
-        self.setGeometry(300, 300, 400, 400)
-        self.setWindowTitle('Рисуем круг')
-        self.btn = QPushButton('Сделать круг', self)
-        self.btn.move(150, 10)
-        self.btn.clicked.connect(self.make_circle)
+        Interface.setup_ui(self)
+        self.circle_params = None
 
     def make_circle(self):
-        self.circle_params = random.randint(10, 100)
+        self.circle_params = {
+            'size': random.randint(10, 100),
+            'color': QColor(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+        }
         self.update()
 
     def paintEvent(self, event):
         if self.circle_params:
             painter = QPainter(self)
-            painter.setBrush(QColor(255, 255, 0))
-            size = self.circle_params
+            painter.setBrush(self.circle_params['color'])
+            size = self.circle_params['size']
             center_x = self.width() // 2
             center_y = self.height() // 2
             painter.drawEllipse(center_x - size // 2, center_y - size // 2, size, size)
